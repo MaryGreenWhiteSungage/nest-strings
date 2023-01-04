@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "plugins": ["@nestjs/graphql"],
+    "assets": [{ "include": "../src/i18n/**/*", "watchAssets": true, 
+"outDir": "dist/apps/api" }]
+  },
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src"
+}
