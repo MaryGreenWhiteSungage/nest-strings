@@ -4,7 +4,6 @@ import * as path from 'path';
 import { I18nFileDto } from './i18n.dto';
 
 export const stringPath = path.join(__dirname + `/../src`, '/i18n');
-const distPath = path.join(__dirname, '/src/i18n');
 @Injectable()
 export class FileService {
   public async saveFile(i18nFileDto: I18nFileDto): Promise<boolean> {
@@ -20,18 +19,8 @@ export class FileService {
       }
       const jsonString: string = JSON.stringify(i18nFileDto.jsonBody);
       const filePath = `${stringPath}/${i18nFileDto.language}/${i18nFileDto.stringType}.json`;
-      const deletePath = `${distPath}/${i18nFileDto.language}/${i18nFileDto.stringType}.json`;
-      console.log(`save to file ${filePath}`);
-      /*
-      if (fs.existsSync(filePath)) {
-        fs.rmSync(deletePath);
-        const dateExt = new Date().getTime();
-        const backupFile = `${filePath}.${dateExt}`;
-        fs.renameSync(filePath, backupFile);
-      }
-*/
+      // console.log(`save to file ${filePath}`);
       fs.writeFileSync(filePath, jsonString);
-      // fs.writeFileSync(filePath, jsonString);
       return true;
     } catch (e) {
       console.log(e);
@@ -49,7 +38,6 @@ export class FileService {
       }
 
       const filePath = `${stringPath}/${language}/${stringType}.json`;
-      console.log(`check if file ${filePath} exists`);
       if (!fs.existsSync(filePath)) {
         throw new Error(`${filePath} does not exist.`);
       }
